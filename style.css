@@ -1,12 +1,16 @@
+.calculatorContainer{
+    display: flex;
+    flex-direction: column;
+}
+
 .calculatorBottomContainer{
     display: flex;
     justify-content: space-evenly;
-    flex-direction: column;
+    flex-direction: center;
 }
 
 .outputTextBox{
     outline: 5px solid black;
-    display: grid;
     text-align: center;
 }
 
