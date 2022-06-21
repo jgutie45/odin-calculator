@@ -1,6 +1,6 @@
 .calculatorContainer{
-    display: flex;
-    flex-direction: column;
+    background-color: blue;
+    outline: 10px solid black;
 }
 
 .calculatorBottomContainer{
@@ -10,18 +10,26 @@
 }
 
 .outputTextBox{
+    background-color: wheat;
     outline: 5px solid black;
     text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding: 5px;
+    font-size: 5.5em;
+    margin: 5px;
 }
 
 .buttonContainers{
+    outline: 5px solid grey;
     display: grid;
-    grid-template-columns: repeat(4,auto);
+    grid-template-columns: repeat(3,130px);
     grid-auto-rows: auto;
 }
 
 button{
-    font-size: 50px;
+    font-size: 45px;
     margin: 5px;
     cursor: pointer;
     font-weight: bold;
