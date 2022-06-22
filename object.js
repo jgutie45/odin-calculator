@@ -18,6 +18,7 @@ function updatingNumbers(number){
     let currentNumber = 0;
     outputText.textContent += number;
     currentNumber = outputText.textContent;
+    console.log(currentNumber);
     return currentNumber;
 }
 
@@ -42,49 +43,71 @@ const operators = document.querySelectorAll('#operatorButton');
 
 
 let firstNumberInput = 0;
-
 let twoNumberInput = 0; 
-
 let operator = null;
+let firstNumberSelected = 0;
+let finalFirstNumber = 0;
+
+buttons.forEach((button) =>{
+    button.addEventListener('click', () => {
+        firstNumberSelected = button.textContent;
+        finalFirstNumber = updatingNumbers(firstNumberSelected);
+    });
+});
 
 
+operators.forEach((button) =>{
+    button.addEventListener('click', () => {
+        operator = button.textContent;
+        outputText.textContent += operator;
+    });
+});
 
-function firstNumber(firstNumberInput){
-    let firstNumberSelected = 0;
-    let finalFirstNumber = 0;
+
+clearButton.addEventListener('click', function(e){
+    outputText.textContent = '';
+});
+
+equalButton.addEventListener('click', ()=>{
+    operate();
+});
+
+
+function seperateEquation(currentEquationText){
+    //let currentOutputText  =  outputText.textContent;
+    let currentOutputText = currentEquationText;
+    let seperateOutputText = '';
     
-    buttons.forEach((button) =>{
-        button.addEventListener('click', () => {
-            firstNumberSelected = button.textContent;
-            finalFirstNumber = updatingNumbers(firstNumberSelected);
-        });
-    });
+    if(currentOutputText.includes("+")){
+        operator = '+';
+        return seperateOutputText = currentOutputText.split('+');
+    }else if(currentOutputText.includes("-")){
+        operator = '-';
+        return seperateOutputText = currentOutputText.split('-');
+    }else if(currentOutputText.includes("*")){
+        operator = '*';
+        return seperateOutputText = currentOutputText.split('*');
+    }else if(currentOutputText.includes("/")){
+        operator = '/';
+        return seperateOutputText = currentOutputText.split('/');
+    }
+    else{
+        console.log("Does Not Exist");
+    }
 }
 
-function operatorDisplay(){
-    operators.forEach((button) =>{
-        button.addEventListener('click', () => {
-            operator = button.textContent;
-            outputText.textContent += operator;
-            console.log(operator);
-        });
-    });
-}
-
-function clear(){
-    clearButton.addEventListener('click', function(e){
-        outputText.textContent = '';
-    });
-}
-
-firstNumber();
-operatorDisplay();
-clear();
-
-
-function operate(numberInput, operator, numberInput2){
+function operate(){
     let results = 0;
+    let numberInput = 0;
+    let numberInput2 = 0;
+    let currentEquationText = outputText.textContent;
+    let equationTextArray = [];
 
+    equationTextArray = seperateEquation(currentEquationText);
+
+    numberInput = equationTextArray[0];
+    numberInput2 = equationTextArray[1];
+    
     switch(operator){
         case "+":
             results = addition(numberInput, numberInput2);
@@ -106,5 +129,5 @@ function operate(numberInput, operator, numberInput2){
             results = "this operator does not exist"
     }
 
-    return results; 
+    outputText.textContent = results;
 }
