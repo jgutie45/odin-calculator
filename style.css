@@ -9,7 +9,7 @@
     flex-direction: center;
 }
 
-.outputTextBox{
+#text{
     background-color: wheat;
     outline: 5px solid black;
     text-align: center;

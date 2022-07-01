@@ -1,26 +1,5 @@
-const additionButton = document.querySelector('#additionButton');
-const subtractionButton = document.querySelector('#subtractionButton');
-const multiplyButton = document.querySelector('#multiplyButton');
-const divisionButton = document.querySelector('#divisionButton');
-const numberSevenButton = document.querySelector('#numberSeven');
-const numberSixButton = document.querySelector('#numberSix');
-const numberFiveButton = document.querySelector('#numberFive');
-const numberFourButton = document.querySelector('#numberFour');
-const numberThreeButton = document.querySelector('#numberThree');
-const numberTwoButton = document.querySelector('#numberTwo');
-const numberOneButton = document.querySelector('#numberOne');
-const numberZeroButton = document.querySelector('#numberZero');
-const outputText = document.querySelector('.outputTextBox');
-const clearButton = document.querySelector('.clearButton');
-const equalButton = document.querySelector('.equalButton');
-
-function updatingNumbers(number){
-    let currentNumber = 0;
-    outputText.textContent += number;
-    currentNumber = outputText.textContent;
-    console.log(currentNumber);
-    return currentNumber;
-}
+let storedFirstValue = null;
+let storedOperator = null; 
 
 function addition(number1, number2){
     return parseInt(number1) + parseInt(number2);
@@ -38,6 +17,59 @@ function divide(number1, number2){
     return number1 / number2;
 }
 
+function operate(number1, number2, operator){
+    let results;
+    switch(operator){
+        case "+":
+            results = addition(number1, number2);
+            break;
+
+        case "-":
+            results = subtraction(number1, number2);
+            break;
+        
+        case "*":
+            results = multiply(number1, number2);
+            break;
+
+        case "/":
+            results = divide(number1, number2);
+            break;
+    }
+
+}
+
+function start(){
+    const numbers = document.querySelectorAll('.numbers');
+    const operators = document.querySelectorAll('.operators');
+    const clear = document.querySelector('#clear');
+    const equal = document.querySelector('#equal');
+
+    numbers.forEach((number) =>{
+        number.addEventListener('click', () => {
+            storedFirstValue = number.textContent;
+            updateUIText(storedFirstValue);
+        });
+    });
+
+    operators.forEach((operator) =>{
+        operator.addEventListener('click', () => {
+            storedOperator = operator.textContent;
+            updateUIText(storedOperator);
+        });
+    });
+    
+}
+
+function updateUIText(text){
+    const uiText = document.querySelector('#text');
+    uiText.textContent = text;
+}
+
+start();
+
+
+/*
 const buttons = document.querySelectorAll('#numberButton');
 const operators = document.querySelectorAll('#operatorButton');
 
@@ -45,15 +77,7 @@ const operators = document.querySelectorAll('#operatorButton');
 let firstNumberInput = 0;
 let twoNumberInput = 0; 
 let operator = null;
-let firstNumberSelected = 0;
-let finalFirstNumber = 0;
 
-buttons.forEach((button) =>{
-    button.addEventListener('click', () => {
-        firstNumberSelected = button.textContent;
-        finalFirstNumber = updatingNumbers(firstNumberSelected);
-    });
-});
 
 
 operators.forEach((button) =>{
@@ -92,9 +116,12 @@ function seperateEquation(currentEquationText){
         return seperateOutputText = currentOutputText.split('/');
     }
     else{
+        outputText.textContent = 'ERROR';0
         console.log("Does Not Exist");
     }
 }
+
+
 
 function operate(){
     let results = 0;
@@ -105,29 +132,11 @@ function operate(){
 
     equationTextArray = seperateEquation(currentEquationText);
 
+    console.log(equationTextArray);
+
     numberInput = equationTextArray[0];
     numberInput2 = equationTextArray[1];
-    
-    switch(operator){
-        case "+":
-            results = addition(numberInput, numberInput2);
-            break;
-
-        case "-":
-            results = subtraction(numberInput, numberInput2);
-            break;
-        
-        case "*":
-            results = multiply(numberInput, numberInput2);
-            break;
-
-        case "/":
-            results = divide(numberInput, numberInput2);
-            break;
-        
-        default:
-            results = "this operator does not exist"
-    }
 
     outputText.textContent = results;
 }
+*/
